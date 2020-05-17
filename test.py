@@ -21,6 +21,15 @@ while i<len(data_index) :
 print(len(data_node))
 print(len(data_index))
 
+#######################################################
+
+for i in data_index :
+    if data_node[str(i)]["intersection"] == True :
+        del data_node[str(i)]["NextIC"]
+        if "Phase" in data_node[str(i)].keys() :
+            del data_node[str(i)]["Phase"]
+
+
 #con = "[?type2 == 'asd']"
 
 #res = search(con, data_json)
