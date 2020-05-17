@@ -1,0 +1,33 @@
+// intersection = false
+"NextIC": ["S0010101", "S0099101"],
+"CheckEast": true,
+"ConnectedNodes": ["3213216546", "3216546546"],
+"Road": "長榮路三段"
+//
+
+
+// intersection = true
+"DeviceID": "S0010101",
+"Phase": {
+  "S0099101": [1, 2],
+  "S0050101": [3]
+}
+"ConnectedNodes": ["3213216546", "3216546546"],
+"Road": ["長榮路三段", "小東路"]
+
+if 兩端的點同時位於該node得北方或南方，CheckEast = true
+
+
+
+"Device": [
+   {
+    "id": "S047001",
+    "ICName": "公園南路與長北街口",
+    "Phase": [1]
+    "closestNodeID": 299305655
+   },
+   {
+    "id": "S012101",
+    "ICName": "成功路與長北街口",
+    "closestNodeID": 864831569
+   }
