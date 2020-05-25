@@ -35,6 +35,7 @@ for i in data_index :
 #res = search(con, data_json)
 #res["type"] = "asd"
 
+"""
 f = open("node_v6.json","w+",encoding="utf-8")
 f.write(json.dumps(data_node, ensure_ascii=False, indent=1)) 
 f.close()
@@ -42,5 +43,4 @@ f.close()
 f = open("node_index_v2.json","w+",encoding="utf-8")
 f.write(json.dumps(data_index, ensure_ascii=False, indent=1)) 
 f.close()
-
-
+"""
