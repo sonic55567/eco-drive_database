@@ -1,7 +1,7 @@
 import json
 from jmespath import search
 
-data = open("node_v3.json","rb").read()
+data = open("nodeTest_v4.json","rb").read()
 data_node = json.loads(data)
 
 data = open("way_traffic_signal_sorted.json","rb").read()
@@ -64,12 +64,13 @@ for i in data_index :
         
         for j in range(len(data_node[str(i)]["ConnectedNodes"])) :
             for k in range(len(data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"])) :
-                if data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k] != data_node[str(i)]["DeviceID"] :
+                #if data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k] != data_node[str(i)]["DeviceID"] :
                     data_node[str(i)]["Phase"][data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k]] = []
+                    data_node[str(i)]["Phase"][data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k]].append(1)
                     print("here")
 
 
-f = open("node_v4.json","w+",encoding="utf-8")
+f = open("nodeTest_v5.json","w+",encoding="utf-8")
 #print(res)
 f.write(json.dumps(data_node, ensure_ascii=False, indent=1)) 
 f.close()
