@@ -26,9 +26,9 @@ for i in range(len(data_index)) :
                         aa = aa+1
                 break
 # 增加NextIC等欄位
+
+
 """
-
-
 ##
 # fix intersection key(string to boolean)
 for i in data_index :

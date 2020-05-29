@@ -8,7 +8,7 @@ print(len(data_trafficSignal))
 for i in range(len(data_trafficSignal)) :
     data_trafficSignal[i]["Device"] = []
     for j in range(len(data_trafficSignal[i]["nodes"])) :
-        for k in range(1, 50):
+        for k in range(1, 500):
             if "Device"+str(k) in data_trafficSignal[i].keys() :
                 if data_trafficSignal[i]["nodes"][j] == data_trafficSignal[i]["Device"+str(k)]["closestNodeID"] :
                     data_trafficSignal[i]["Device"].append(data_trafficSignal[i]["Device"+str(k)])
