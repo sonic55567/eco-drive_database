@@ -1,7 +1,7 @@
 import json
 from jmespath import search
 
-data = open("node_v4.json","rb").read()
+data = open("nodeTest_v5.json","rb").read()
 data_node = json.loads(data)
 
 data = open("node_index.json","rb").read()
@@ -22,12 +22,14 @@ for i in data_index :
                 if lon1-lon < 0 :
                     data_node[str(i)]["ConnectedNodes"][0], data_node[str(i)]["ConnectedNodes"][1] = data_node[str(i)]["ConnectedNodes"][1], data_node[str(i)]["ConnectedNodes"][0]
                     data_node[str(i)]["NextIC"][0], data_node[str(i)]["NextIC"][1] = data_node[str(i)]["NextIC"][1], data_node[str(i)]["NextIC"][0]
+                    data_node[str(i)]["NextICCC"][0], data_node[str(i)]["NextICCC"][1] = data_node[str(i)]["NextICCC"][1], data_node[str(i)]["NextICCC"][0]
                     print("eastSwapped!!")
             else :
                 # need to swap
                 if lat1-lat < 0 :
                     data_node[str(i)]["ConnectedNodes"][0], data_node[str(i)]["ConnectedNodes"][1] = data_node[str(i)]["ConnectedNodes"][1], data_node[str(i)]["ConnectedNodes"][0]
                     data_node[str(i)]["NextIC"][0], data_node[str(i)]["NextIC"][1] = data_node[str(i)]["NextIC"][1], data_node[str(i)]["NextIC"][0]
+                    data_node[str(i)]["NextICCC"][0], data_node[str(i)]["NextICCC"][1] = data_node[str(i)]["NextICCC"][1], data_node[str(i)]["NextICCC"][0]
                     print("swapped")
 
 f = open("node_v5.json","w+",encoding="utf-8")

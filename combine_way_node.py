@@ -18,6 +18,7 @@ for i in range(len(data_node)) :
     convert[data_node[i]["id"]]["intersection"] = data_node[i]["intersection"]
     convert[data_node[i]["id"]]["way"] = []
     convert[data_node[i]["id"]]["NextIC"] = []
+    convert[data_node[i]["id"]]["NextICCC"] = []
     convert[data_node[i]["id"]]["CheckEast"] = False
     convert[data_node[i]["id"]]["ConnectedNodes"] = []
     convert[data_node[i]["id"]]["Road"] = []

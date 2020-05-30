@@ -58,12 +58,6 @@ for i in data_index :
             for j in data_node[str(i)]["Phase"].keys() :
                 data_node[str(i)]["Phase"][str(j)] = 0
 
-                    
-
-                
-
-
-
 f = open("node_v9.json","w+",encoding="utf-8")
 f.write(json.dumps(data_node, ensure_ascii=False, indent=1)) 
 f.close()

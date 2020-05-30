@@ -38,23 +38,30 @@ for i in data_index :
         data_node[str(i)]["intersection"] = False
 
 deviceID = ""
+nodeID = ""
 
 for i in range(len(data_way)) :
     deviceID = ""
+    nodeID = ""
     for j in range(len(data_way[i]["nodes"])) :
         if data_node[str(data_way[i]["nodes"][j])]["intersection"] == True :
             if "DeviceID" in  data_node[str(data_way[i]["nodes"][j])].keys() :
                 deviceID = data_node[str(data_way[i]["nodes"][j])]["DeviceID"]
+                nodeID = str(data_way[i]["nodes"][j])
         else :
             data_node[str(data_way[i]["nodes"][j])]["NextIC"].append(deviceID)
+            data_node[str(data_way[i]["nodes"][j])]["NextICCC"].append(nodeID)
             #print(deviceID)
     deviceID = ""
+    nodeID = ""
     for j in reversed(range(len(data_way[i]["nodes"]))) :
         if data_node[str(data_way[i]["nodes"][j])]["intersection"] == True :
             if "DeviceID" in  data_node[str(data_way[i]["nodes"][j])].keys() :
                 deviceID = data_node[str(data_way[i]["nodes"][j])]["DeviceID"]
+                nodeID = str(data_way[i]["nodes"][j])
         else :
             data_node[str(data_way[i]["nodes"][j])]["NextIC"].append(deviceID)
+            data_node[str(data_way[i]["nodes"][j])]["NextICCC"].append(nodeID)
 # 抓出nextIC
 
 
@@ -68,6 +75,18 @@ for i in data_index :
                     data_node[str(i)]["Phase"][data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k]] = []
                     data_node[str(i)]["Phase"][data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k]].append(1)
                     print("here")
+
+# delete useless key in intersection nodes (NextIC...)
+count = 0
+for i in data_index :
+    if data_node[str(i)]["intersection"] == True :
+        del data_node[str(i)]["NextIC"]
+        if "DeviceID" in  data_node[str(i)].keys() :
+            if "" in data_node[str(i)]["Phase"].keys() :
+                count = count+1
+                print("delete the empty device id successfully ", count)
+                del data_node[str(i)]["Phase"][""]
+
 
 
 f = open("nodeTest_v5.json","w+",encoding="utf-8")

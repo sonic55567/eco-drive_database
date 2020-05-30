@@ -19,6 +19,8 @@ for i in data_index :
     data_node[str(i)]["Intersection"] = data_node[str(i)].pop("intersection")
     if "NextIC" in data_node[str(i)].keys() :
         data_node[str(i)]["NextIC"] = data_node[str(i)].pop("NextIC")
+    if "NextICCC" in data_node[str(i)].keys() :
+        data_node[str(i)]["NextICCC"] = data_node[str(i)].pop("NextICCC")
     if "CheckEast" in data_node[str(i)].keys() :
         data_node[str(i)]["CheckEast"] = data_node[str(i)].pop("CheckEast")
     data_node[str(i)]["ConnectedNodes"] = data_node[str(i)].pop("ConnectedNodes")
