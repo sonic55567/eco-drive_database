@@ -22,6 +22,9 @@ data_node = json.loads(data)
 data = open("node_index.json","rb").read()
 data_index = json.loads(data)
 
+data = open("phaseMapping.json","rb").read()
+data_phase_index = json.loads(data)
+
 #change ConnectedNodes type from long to string
 for i in data_index :
     for j in range(len(data_node[str(i)]["ConnectedNodes"])) :
@@ -32,9 +35,17 @@ for i in data_index :
     if "NextIC" in data_node[str(i)] :
         data_node[str(i)]["NextIC"] = data_node[str(i)]["NextICCC"]
     del data_node[str(i)]["NextICCC"]
+    if "Phase" in data_node[str(i)] :
+        data_node[str(i)]["Phases"] = {}
+        for j in data_node[str(i)]["Phase"].keys() :
+            data_node[str(i)]["Phases"][data_phase_index[str(i)][str(j)]] = data_node[str(i)]["Phase"][str(j)]
 
+for i in data_index :
+    if "Phase" in data_node[str(i)] :
+        data_node[str(i)]["Phase"] = data_node[str(i)]["Phases"]
+        del data_node[str(i)]["Phases"]
                 
 
-f = open("node_v10.json","w+",encoding="utf-8")
+f = open("node_v11.json","w+",encoding="utf-8")
 f.write(json.dumps(data_node, ensure_ascii=False, indent=1)) 
 f.close()

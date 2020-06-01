@@ -11,6 +11,7 @@ data = open("node_index.json","rb").read()
 data_index = json.loads(data)
 convert = dict()
 index = list()
+phaseMap = dict()
 aa = 0
 """
 ##
@@ -68,12 +69,13 @@ for i in range(len(data_way)) :
 for i in data_index :
     if (data_node[str(i)]["intersection"] == True) and ("DeviceID" in  data_node[str(i)].keys()) :
         data_node[str(i)]["Phase"] = {}
-        
+        phaseMap[str(i)] = {}
         for j in range(len(data_node[str(i)]["ConnectedNodes"])) :
             for k in range(len(data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"])) :
                 #if data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k] != data_node[str(i)]["DeviceID"] :
                     data_node[str(i)]["Phase"][data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k]] = []
                     data_node[str(i)]["Phase"][data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k]].append(1)
+                    phaseMap[str(i)][data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k]] = data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextICCC"][k]
                     print("here")
 
 # delete useless key in intersection nodes (NextIC...)
@@ -92,4 +94,9 @@ for i in data_index :
 f = open("nodeTest_v5.json","w+",encoding="utf-8")
 #print(res)
 f.write(json.dumps(data_node, ensure_ascii=False, indent=1)) 
+f.close()
+
+f = open("phaseMapping.json","w+",encoding="utf-8")
+#print(res)
+f.write(json.dumps(phaseMap, ensure_ascii=False, indent=1)) 
 f.close()

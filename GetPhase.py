@@ -10,6 +10,9 @@ data_index = json.loads(data)
 data = open("converted.json","rb").read()
 data_traffic = json.loads(data)
 
+data = open("phaseMapping.json","rb").read()
+data_phase_index = json.loads(data)
+
 count = 0
 # change Phase's value from list to integer
 for i in data_index :
@@ -43,6 +46,7 @@ for i in data_index :
                     for k in data_node[str(j)]["Roads"] :
                         if k == target :
                             data_node[str(i)]["Phase"][data_node[str(j)]["DeviceID"]] = 0
+                            data_phase_index[str(i)][data_node[str(j)]["DeviceID"]] = str(j)
                             break
 
                 elif data_node[str(j)]["Intersection"] == False :
@@ -50,16 +54,22 @@ for i in data_index :
                         if k == target :
                             print("target hit!")
                             print(target)
-                            for kk in data_node[str(j)]["NextIC"] :
-                                if kk != "" and kk != data_node[str(i)]["DeviceID"] :
-                                    data_node[str(i)]["Phase"][str(kk)] = 0
+                            for kk in range(len(data_node[str(j)]["NextIC"])) :
+                                if data_node[str(j)]["NextIC"][kk] != "" and data_node[str(j)]["NextIC"][kk] != data_node[str(i)]["DeviceID"] :
+                                    data_node[str(i)]["Phase"][str(data_node[str(j)]["NextIC"][kk])] = 0
+                                    data_phase_index[str(i)][str(data_node[str(j)]["NextIC"][kk])] = str(data_node[str(j)]["NextICCC"][kk])
                                     print("change!")
+                            
         else :
             for j in data_node[str(i)]["Phase"].keys() :
                 data_node[str(i)]["Phase"][str(j)] = 0
 
 f = open("node_v9.json","w+",encoding="utf-8")
 f.write(json.dumps(data_node, ensure_ascii=False, indent=1)) 
+f.close()
+
+f = open("phaseMapping.json","w+",encoding="utf-8")
+f.write(json.dumps(data_phase_index, ensure_ascii=False, indent=1)) 
 f.close()
 
 
