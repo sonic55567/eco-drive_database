@@ -71,12 +71,19 @@ for i in data_index :
         data_node[str(i)]["Phase"] = {}
         phaseMap[str(i)] = {}
         for j in range(len(data_node[str(i)]["ConnectedNodes"])) :
-            for k in range(len(data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"])) :
-                #if data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k] != data_node[str(i)]["DeviceID"] :
-                    data_node[str(i)]["Phase"][data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k]] = []
-                    data_node[str(i)]["Phase"][data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k]].append(1)
-                    phaseMap[str(i)][data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k]] = data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextICCC"][k]
-                    print("here")
+            if data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["intersection"] == False :
+                for k in range(len(data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"])) :
+                    
+                    if data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k] != data_node[str(i)]["DeviceID"] :
+                        data_node[str(i)]["Phase"][data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k]] = []
+                        data_node[str(i)]["Phase"][data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k]].append(1)
+                        phaseMap[str(i)][data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextIC"][k]] = data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["NextICCC"][k]
+                        #print("here")
+            elif "DeviceID" in data_node[str(data_node[str(i)]["ConnectedNodes"][j])].keys() :
+                data_node[str(i)]["Phase"][data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["DeviceID"]] = []
+                data_node[str(i)]["Phase"][data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["DeviceID"]].append(1)
+                phaseMap[str(i)][data_node[str(data_node[str(i)]["ConnectedNodes"][j])]["DeviceID"]] = str(data_node[str(i)]["ConnectedNodes"][j])
+
 
 # delete useless key in intersection nodes (NextIC...)
 count = 0
@@ -86,7 +93,7 @@ for i in data_index :
         if "DeviceID" in  data_node[str(i)].keys() :
             if "" in data_node[str(i)]["Phase"].keys() :
                 count = count+1
-                print("delete the empty device id successfully ", count)
+                #print("delete the empty device id successfully ", count)
                 del data_node[str(i)]["Phase"][""]
 
 
