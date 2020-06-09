@@ -25,7 +25,7 @@ for i in data_traffic["DeviceWeekday"].keys():                          # device
                 for k in data_traffic["Traffic"][str(i)][planID].keys():
                     order = data_traffic["Traffic"][str(i)][planID][str(k)]["PhaseOrder"]
                     count = count+1
-                    if (order == "B0") or (order == "00") or (order == "40") or (order == "60") or (order == "A0") or (order == "E2") or (order == "52") or (order == "A2") :
+                    if (order == "B0") or (order == "00") or (order == "40") or (order == "60") or (order == "52") or (order == "A0") or (order == "E2") or (order == "52") or (order == "A2") :
                         cover = cover+1
         break
 print("Cover rate in the afternoon:", cover*100/count, "%")
@@ -51,7 +51,7 @@ for i in data_traffic["DeviceWeekday"].keys():                          # device
                 for k in data_traffic["Traffic"][str(i)][planID].keys():
                     order = data_traffic["Traffic"][str(i)][planID][str(k)]["PhaseOrder"]
                     count = count+1
-                    if (order == "B0") or (order == "00") or (order == "40") or (order == "60") or (order == "A0") or (order == "E2") or (order == "52") or (order == "A2") :
+                    if (order == "B0") or (order == "00") or (order == "40") or (order == "60") or (order == "52") or (order == "A0") or (order == "E2") or (order == "52") or (order == "A2") :
                         cover = cover+1
         break
 print("Cover rate in the evening:", cover*100/count, "%")
